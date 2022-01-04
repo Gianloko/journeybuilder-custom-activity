@@ -1,6 +1,6 @@
 const { v1: Uuidv1 } = require('uuid');
 const https = require('https');
-const axios = require('axios');
+const axios = require('axios').default;
 const JWT = require('../utils/jwtDecoder');
 const SFClient = require('../utils/sfmc-client');
 const logger = require('../utils/logger');
