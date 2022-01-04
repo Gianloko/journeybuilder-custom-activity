@@ -1,4 +1,5 @@
 const { v1: Uuidv1 } = require('uuid');
+const https = require('https');
 const JWT = require('../utils/jwtDecoder');
 const SFClient = require('../utils/sfmc-client');
 const logger = require('../utils/logger');
@@ -15,34 +16,45 @@ exports.execute = async (req, res) => {
 
   logger.info(data);
   logger.info("before try/catch");
+  
+  logger.info(data.inArguments[0].contactKey);
+  logger.info(data.inArguments[0].eventField);
+  logger.info(data.inArguments[0].textField);
+  logger.info(data.inArguments[0].dateField);
 
   try {
     
 	const id = Uuidv1();
 	
-	const headers = new Headers();
-	headers.append("Content-Type", "application/json");
-
-	const body = {
-	  "mock_data": data.inArguments[0].contactKey,
-	  "ip_address": "",
-	  "email": "user@example.com",
-	  "user_agent": "",
-	  "url": "http://example.com/"
-	};
+	const dataToSend = JSON.stringify(data);
 
 	const options = {
-	  method: "POST",
-	  headers,
-	  mode: "cors",
-	  body: JSON.stringify(body),
-	};
+	  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
+	  port: 443,
+	  path: '/',
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+		'Content-Length': dataToSend.length
+	  }
+	}
 
-	const response 	   = await fetch("https://en5kbmsv4ixvb0y.m.pipedream.net", options);
-	const dataResponse = await response.json();
+	const req = https.request(options, res => {
+	  logger.info(`statusCode: ${res.statusCode}`)
+
+	  res.on('data', d => {
+		process.stdout.write(d);
+	  })
+	})
+
+	req.on('error', error => {
+	  logger.error(error);
+	})
+
+	req.write(dataToSend);
+	req.end();
 	
-	logger.info("end of try/catch");
-	logger.info(dataResponse);	
+	logger.info("end of request");
 		
     /**await SFClient.saveData(process.env.DATA_EXTENSION_EXTERNAL_KEY, [
       {
@@ -58,6 +70,7 @@ exports.execute = async (req, res) => {
     ]);**/
 	
   } catch (error) {
+	logger.error("there is an error:");
     logger.error(error);
   }
 
