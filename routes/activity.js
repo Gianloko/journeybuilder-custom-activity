@@ -16,9 +16,33 @@ exports.execute = async (req, res) => {
   logger.info(data);
 
   try {
-    const id = Uuidv1();
+    
+	const id = Uuidv1();
+	
+	const headers = new Headers();
+	headers.append("Content-Type", "application/json");
 
-    await SFClient.saveData(process.env.DATA_EXTENSION_EXTERNAL_KEY, [
+	const body = {
+	  "mock_data": data.inArguments[0].contactKey,
+	  "ip_address": "",
+	  "email": "user@example.com",
+	  "user_agent": "",
+	  "url": "http://example.com/"
+	};
+
+	const options = {
+	  method: "POST",
+	  headers,
+	  mode: "cors",
+	  body: JSON.stringify(body),
+	};
+
+	const response 	   = await fetch("https://en5kbmsv4ixvb0y.m.pipedream.net", options);
+	const dataResponse = await response.json();
+	
+	logger.info(dataResponse);	
+		
+    /**await SFClient.saveData(process.env.DATA_EXTENSION_EXTERNAL_KEY, [
       {
         keys: {
           Id: id,
@@ -29,7 +53,8 @@ exports.execute = async (req, res) => {
           Text: data.inArguments[0].Text,
         },
       },
-    ]);
+    ]);**/
+	
   } catch (error) {
     logger.error(error);
   }
