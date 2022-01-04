@@ -13,11 +13,10 @@ exports.execute = async (req, res) => {
   // decode data
   const data = JWT(req.body);
 
-  //logger.info(data);
+  logger.info(data);
+  logger.info("before try/catch");
 
   try {
-	  
-	logger.info(req.body);
     
 	const id = Uuidv1();
 	
@@ -42,6 +41,7 @@ exports.execute = async (req, res) => {
 	const response 	   = await fetch("https://en5kbmsv4ixvb0y.m.pipedream.net", options);
 	const dataResponse = await response.json();
 	
+	logger.info("end of try/catch");
 	logger.info(dataResponse);	
 		
     /**await SFClient.saveData(process.env.DATA_EXTENSION_EXTERNAL_KEY, [

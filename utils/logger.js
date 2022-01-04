@@ -13,7 +13,7 @@ const alignColorsAndTime = winston.format.combine(
     all: true,
   }),
   winston.format.label({
-    label: '[LOGGER]',
+    label: '[LOGGER FROM NODE.JS APP]',
   }),
   winston.format.timestamp({
     format: 'YY-MM-DD HH:MM:SS',
