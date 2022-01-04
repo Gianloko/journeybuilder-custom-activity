@@ -11,11 +11,13 @@ const logger = require('../utils/logger');
  */
 exports.execute = async (req, res) => {
   // decode data
-  const data = JWT(req.body);
+  //const data = JWT(req.body);
 
-  logger.info(data);
+  //logger.info(data);
 
   try {
+	  
+	logger.info(req.body);
     
 	const id = Uuidv1();
 	
