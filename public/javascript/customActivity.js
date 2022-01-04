@@ -108,9 +108,9 @@ function save() {
         payload['arguments'].execute.inArguments = [
             {
                 "contactKey" : "{{Contact.Key}}",
-				"eventField": "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"Event\"}}",
-				"textField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"Text\"}}",
-				"dateField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"Date\"}}"
+				"eventField": "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"30E9F4D9-FBB1-4D6B-B0AF-C7171A2F38D7.Event\"}}",
+				"textField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"30E9F4D9-FBB1-4D6B-B0AF-C7171A2F38D7.Text\"}}",
+				"dateField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84.\"30E9F4D9-FBB1-4D6B-B0AF-C7171A2F38D7.Date\"}}"
             }
         ];
 
