@@ -108,9 +108,9 @@ function save() {
         payload['arguments'].execute.inArguments = [
             {
                 "contactKey" : "{{Contact.Key}}",
-				"eventField": "{{Contact.Attribute.PushNotificationTest.Event}}",
-				"textField" : "{{Contact.Attribute.PushNotificationTest.Text}}",
-				"dateField" : "{{Contact.Attribute.PushNotificationTest.Date}}"
+				"eventField": "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84."Event"}}",
+				"textField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84."Text"}}",
+				"dateField" : "{{Event.DEAudience-95ed3cda-d86b-19e4-1ce5-161fb95e9b84."Date"}}"
             }
         ];
 
