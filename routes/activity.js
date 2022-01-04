@@ -1,6 +1,5 @@
 const { v1: Uuidv1 } = require('uuid');
 const https = require('https');
-const axios = require('axios').default;
 const JWT = require('../utils/jwtDecoder');
 const SFClient = require('../utils/sfmc-client');
 const logger = require('../utils/logger');
@@ -26,14 +25,6 @@ exports.execute = async (req, res) => {
   try {
     
 	const id = Uuidv1();
-	
-	const dataToSend = JSON.stringify(data);
-
-	axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', data).then((response) => {
-		logger.info(response.data);
-    }).catch(error => {
-		logger.error(error);
-	});
 	
 	logger.info("end of request");
 	
