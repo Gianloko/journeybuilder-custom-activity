@@ -1,8 +1,6 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
 const https = require('https');
-const http = require('http');
-const got = require('got');
 
 const options = {
   auth: {
@@ -38,14 +36,27 @@ const saveData = async (externalKey, data) => client.post({
 
 const fetchPostData = async (postData) => {
 	
-    try {
+	const options = {
+	  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
+	  port: 443,
+	  path: '/',
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/json',
+		'Content-Length': data.length
+	  }
+	}
+	
+	return await doPostCallout(options, postData);
+
+    //try {
 		
         //const fetchResponse = await axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData);
 		//logger.info(fetchResponse);
         //return fetchResponse;
 		
-		const fetchResponse = await got.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData).json();
-		return fetchResponse.json();
+		//const fetchResponse = await got.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData).json();
+		//return fetchResponse.json();
 		
 		//logger.info(fetchResponse);
         //return fetchResponse;
@@ -77,10 +88,35 @@ const fetchPostData = async (postData) => {
 		req.end();**/
 		
 		
-    } catch (e) {
+    /**} catch (e) {
 		logger.info("catch error: " + e);
         return e;
-    }
+    }**/
+	
+}
+
+const doPostCallout = (options, data) => {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      res.setEncoding('utf8');
+      let responseBody = '';
+
+      res.on('data', (chunk) => {
+        responseBody += chunk;
+      });
+
+      res.on('end', () => {
+        resolve(JSON.parse(responseBody));
+      });
+    });
+
+    req.on('error', (err) => {
+      reject(err);
+    });
+
+    req.write(data)
+    req.end();
+  });
 }
 
 module.exports = {
