@@ -1,6 +1,5 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
-import fetch from 'node-fetch';
 
 const options = {
   auth: {
