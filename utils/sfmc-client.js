@@ -1,7 +1,6 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
-
-global.fetch = require("node-fetch");
+const axios = require('axios').default;
 
 const options = {
   auth: {
@@ -39,15 +38,10 @@ const fetchPostData = async (postData) => {
 	
     try {
 		
-        const fetchResponse = await fetch('https://en5kbmsv4ixvb0y.m.pipedream.net', {
-			method  : 'post',
-			body    : JSON.stringify(postData),
-			headers : { 'Content-Type' : 'application/json' }
-		});
+        const fetchResponse = await axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData);
 		
-        const data = await fetchResponse.json();
-		logger.info(data);
-        return data;
+		logger.info(fetchResponse);
+        return fetchResponse;
     } catch (e) {
 		logger.info("catch error: " + e);
         return e;
