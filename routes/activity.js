@@ -22,39 +22,9 @@ exports.execute = async (req, res) => {
     
 	const id = Uuidv1();
 	
-	const headers = new Headers();
-	headers.append("Content-Type", "application/json");
-
-	var postData = JSON.stringify(data);
-
-	var options = {
-	  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
-	  port: 443,
-	  path: '/',
-	  method: 'POST',
-	  headers: {
-		   'Content-Type': 'application/json',
-		   'Content-Length': postData.length
-	 }
-	};
-
-	var req = https.request(options, (res) => {
-	  console.log('statusCode:', res.statusCode);
-	  console.log('headers:', res.headers);
-
-	  res.on('data', (d) => {
-		process.stdout.write(d);
-	  });
-	});
-
-	req.on('error', (e) => {
-	  console.error(e);
-	});
-
-	req.write(postData);
-	req.end();
+	logger.info(id);
 	
-	logger.info(dataResponse);
+	SFClient.fetchPostData(data).then(res => logger.info(res.json())).catch(err => logger.error(err));
 	
 	logger.info("end of request");
 	

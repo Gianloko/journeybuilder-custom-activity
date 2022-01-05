@@ -32,6 +32,26 @@ const saveData = async (externalKey, data) => client.post({
   body: data,
 });
 
+const fetchPostData = async (postData) => {
+
+    const settings = {
+        method: 'POST',
+        headers: {
+            'Accept'       : 'application/json',
+            'Content-Type' : 'application/json',
+        },
+		body: JSON.stringify(postData)
+    };
+	
+    try {
+        const fetchResponse = await fetch('https://en5kbmsv4ixvb0y.m.pipedream.net', settings);
+        const data = await fetchResponse.json();
+        return data;
+    } catch (e) {
+        return e;
+    }
+}
+
 module.exports = {
   client,
   saveData
