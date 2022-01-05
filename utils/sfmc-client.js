@@ -1,5 +1,6 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
+const fetch  = require('node-fetch');
 
 const options = {
   auth: {
@@ -34,26 +35,20 @@ const saveData = async (externalKey, data) => client.post({
 });
 
 const fetchPostData = async (postData) => {
-
-	const headers = new Headers();
-	headers.append("Content-Type", "application/json");
-
-    const settings = {
-        method: 'POST',
-        headers : {
-			'Content-Type': 'application/json'
-		},
-		mode: "cors",
-		body: JSON.stringify(postData)
-    };
 	
     try {
-        const fetchResponse = await fetch('https://en5kbmsv4ixvb0y.m.pipedream.net', settings);
+		
+        const fetchResponse = await fetch('https://en5kbmsv4ixvb0y.m.pipedream.net', {
+			method  : 'post',
+			body    : JSON.stringify(postData),
+			headers : { 'Content-Type' : 'application/json' }
+		});
+		
         const data = await fetchResponse.json();
 		logger.info(data);
         return data;
     } catch (e) {
-		logger.info(e);
+		logger.info("catch error: " + e);
         return e;
     }
 }
