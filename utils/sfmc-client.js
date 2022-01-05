@@ -47,7 +47,7 @@ const fetchPostData = async (postData) => {
 	  }
 	}
 	
-	return await doPostCallout(options, postData);
+	return await doPostCallout(options, JSON.stringify(postData));
 
     //try {
 		
