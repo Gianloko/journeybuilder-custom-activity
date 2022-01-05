@@ -1,4 +1,5 @@
 const FuelRest = require('fuel-rest');
+const logger = require('../utils/logger');
 
 const options = {
   auth: {
@@ -37,6 +38,7 @@ const fetchPostData = async (postData) => {
     const settings = {
         method: 'POST',
         headers: {
+			'Accept' : 'application/json',
             'Content-Type' : 'application/json'
         },
 		body: JSON.stringify(postData)
@@ -45,6 +47,7 @@ const fetchPostData = async (postData) => {
     try {
         const fetchResponse = await fetch('https://en5kbmsv4ixvb0y.m.pipedream.net', settings);
         const data = await fetchResponse.json();
+		logger.info(data);
         return data;
     } catch (e) {
         return e;
