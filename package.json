@@ -4,6 +4,7 @@
   "description": "",
   "private": true,
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node ./bin/start",
     "test": "mocha --recursive",
