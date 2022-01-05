@@ -35,12 +35,13 @@ const saveData = async (externalKey, data) => client.post({
 
 const fetchPostData = async (postData) => {
 
+	const headers = new Headers()
+	headers.append("Content-Type", "application/json")
+
     const settings = {
         method: 'POST',
-        headers: {
-			'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-        },
+        headers,
+		mode: "cors",
 		body: JSON.stringify(postData)
     };
 	
