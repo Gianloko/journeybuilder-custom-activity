@@ -1,9 +1,7 @@
 const { v1: Uuidv1 } = require('uuid');
-const https = require('https');
 const JWT = require('../utils/jwtDecoder');
 const SFClient = require('../utils/sfmc-client');
 const logger = require('../utils/logger');
-const http = require('http');
 
 /**
  * The Journey Builder calls this method for each contact processed by the journey.

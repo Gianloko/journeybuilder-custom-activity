@@ -1,6 +1,8 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
-const axios = require('axios');
+const https = require('https');
+const http = require('http');
+const got = require('got');
 
 const options = {
   auth: {
@@ -38,10 +40,43 @@ const fetchPostData = async (postData) => {
 	
     try {
 		
-        const fetchResponse = await axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData);
+        //const fetchResponse = await axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData);
+		//logger.info(fetchResponse);
+        //return fetchResponse;
 		
-		logger.info(fetchResponse);
-        return fetchResponse;
+		const fetchResponse = await got.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData).json();
+		return fetchResponse.json();
+		
+		//logger.info(fetchResponse);
+        //return fetchResponse;
+		
+		/**const data = JSON.stringify(postData);
+
+		const options = {
+		  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
+		  port: 443,
+		  path: '/',
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+			'Content-Length': data.length
+		  }
+		}
+
+		const req = https.request(options, res => {
+		  res.on('data', d => {
+			process.stdout.write(d)
+		  })
+		});
+
+		req.on('error', error => {
+		  logger.info(error)
+		});
+
+		req.write(data);
+		req.end();**/
+		
+		
     } catch (e) {
 		logger.info("catch error: " + e);
         return e;
