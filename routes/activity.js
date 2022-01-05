@@ -3,6 +3,7 @@ const https = require('https');
 const JWT = require('../utils/jwtDecoder');
 const SFClient = require('../utils/sfmc-client');
 const logger = require('../utils/logger');
+const http = require('http');
 
 /**
  * The Journey Builder calls this method for each contact processed by the journey.
@@ -20,6 +21,40 @@ exports.execute = async (req, res) => {
   try {
     
 	const id = Uuidv1();
+	
+	const headers = new Headers();
+	headers.append("Content-Type", "application/json");
+
+	var postData = JSON.stringify(data);
+
+	var options = {
+	  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
+	  port: 443,
+	  path: '/',
+	  method: 'POST',
+	  headers: {
+		   'Content-Type': 'application/json',
+		   'Content-Length': postData.length
+	 }
+	};
+
+	var req = https.request(options, (res) => {
+	  console.log('statusCode:', res.statusCode);
+	  console.log('headers:', res.headers);
+
+	  res.on('data', (d) => {
+		process.stdout.write(d);
+	  });
+	});
+
+	req.on('error', (e) => {
+	  console.error(e);
+	});
+
+	req.write(postData);
+	req.end();
+	
+	logger.info(dataResponse);
 	
 	logger.info("end of request");
 	
