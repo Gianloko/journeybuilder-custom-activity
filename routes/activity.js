@@ -24,7 +24,7 @@ exports.execute = async (req, res) => {
 	
 	logger.info(id);
 	
-	SFClient.fetchPostData(data).then(res => logger.info(res.json())).catch(err => logger.info(err));
+	SFClient.fetchPostData(data).then(res => logger.info(res.json())).catch(err => logger.info(err.message));
 	
 	logger.info("end of request");
 	

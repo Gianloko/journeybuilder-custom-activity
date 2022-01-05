@@ -53,5 +53,6 @@ const fetchPostData = async (postData) => {
 
 module.exports = {
   client,
-  saveData
+  saveData,
+  fetchPostData
 };
