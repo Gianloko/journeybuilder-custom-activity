@@ -1,6 +1,6 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
-const axios = require('axios').default;
+const axios = require('axios');
 
 const options = {
   auth: {
