@@ -114,6 +114,8 @@ function save() {
 				"dateField"  : "{{Event.\"DEAudience-1bc977ef-f8f6-f7c1-4f5f-0ad296980e22\".\"Date\"}}"
             }
         ];
+		
+		//Comment
 
         $('.js-activity-setting').each(function () {
             const $el = $(this);
