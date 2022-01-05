@@ -43,7 +43,7 @@ const fetchPostData = async (postData) => {
 	  method: 'POST',
 	  headers: {
 		'Content-Type': 'application/json',
-		'Content-Length': data.length
+		'Content-Length': JSON.stringify(postData).length
 	  }
 	}
 	
