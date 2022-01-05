@@ -50,6 +50,7 @@ const fetchPostData = async (postData) => {
 		logger.info(data);
         return data;
     } catch (e) {
+		logger.info(e);
         return e;
     }
 }
