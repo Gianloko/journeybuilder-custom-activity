@@ -18,9 +18,8 @@ exports.execute = async (req, res) => {
   logger.info("before try/catch");
   
   logger.info(data.inArguments[0].contactKey);
-  logger.info(data.inArguments[0].eventField);
-  logger.info(data.inArguments[0].textField);
-  logger.info(data.inArguments[0].dateField);
+  
+  
 
   try {
     

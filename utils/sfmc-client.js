@@ -34,5 +34,5 @@ const saveData = async (externalKey, data) => client.post({
 
 module.exports = {
   client,
-  saveData,
+  saveData
 };
