@@ -1,6 +1,8 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
 
+global.fetch = require("node-fetch");
+
 const options = {
   auth: {
     clientId: process.env.SFMC_CLIENT_ID,
