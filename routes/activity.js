@@ -17,10 +17,6 @@ exports.execute = async (req, res) => {
   logger.info(data);
   logger.info("before try/catch");
   
-  logger.info(data.inArguments[0].contactKey);
-  
-  
-
   try {
     
 	const id = Uuidv1();

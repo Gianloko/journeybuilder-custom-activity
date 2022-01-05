@@ -108,9 +108,10 @@ function save() {
         payload['arguments'].execute.inArguments = [
             {
                 "contactKey" : "{{Contact.Key}}",
+				"emailField" : "{{InteractionDefaults.Email}}",
 				"eventField" : "{{Contact.Attribute.PushNotificationTest.Event}}",
-				"textField"  : "{{Contact.Attribute.PushNotificationTest.Text}}",
-				"dateField"  : "{{Contact.Attribute.PushNotificationTest.Date}}"
+				"textField"  : "{{Contact.Attribute.\"PushNotificationTest\".\"Text\"}}",
+				"dateField"  : "{{Event.\"DEAudience-1bc977ef-f8f6-f7c1-4f5f-0ad296980e22\".\"Date\"}}"
             }
         ];
 
