@@ -24,13 +24,13 @@ exports.execute = async (req, res) => {
 	
 	logger.info(id);
 	
-	SFClient.fetchPostData(data).then(res => logger.info(res.json())).catch(err => logger.error(err));
+	SFClient.fetchPostData(data).then(res => logger.info(res.json())).catch(err => logger.info(err); logger.info(err.message));
 	
 	logger.info("end of request");
 	
   } catch (error) {
-	logger.error("there is an error:");
-    logger.error(error);
+	logger.info("there is an error:");
+    logger.info(error);
   }
 
   res.status(200).send({
