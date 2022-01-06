@@ -68,12 +68,15 @@ const fetchPostData = async (postData) => {
 	
 	const authenticationHeader = 'Basic ' + Buffer.from('appmyaw' + ':' + 'Q6e^4sH#t!Rq').toString('base64');
 	
+	logger.info('auth header: ' + authenticationHeader);
+	
 	const options = {
 	  hostname: 'apitest.easybook.it',
-	  port: 80,
 	  path: '/ms-notification/v1/notification/send',
 	  method: 'POST',
 	  headers: {
+		'Accept'         : '*/*',
+		'Connection'     : 'keep-alive',
 		'Content-Type'   : 'application/json',
 		'Content-Length' : JSON.stringify(arrayData).length,
 		'Authorization'  : authenticationHeader
