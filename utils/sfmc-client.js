@@ -88,7 +88,7 @@ const fetchPostData = async (postData) => {
 
 const doPostCallout = (options, data) => {
   return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
+    const req = http.request(options, (res) => {
       res.setEncoding('utf8');
       let responseBody = '';
 
