@@ -1,6 +1,7 @@
 const FuelRest = require('fuel-rest');
 const logger = require('../utils/logger');
 const https = require('https');
+const http = require('http');
 
 const options = {
   auth: {
@@ -36,7 +37,7 @@ const saveData = async (externalKey, data) => client.post({
 
 const fetchPostData = async (postData) => {
 	
-	const options = {
+	/** const options = {
 	  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
 	  port: 443,
 	  path: '/',
@@ -45,54 +46,41 @@ const fetchPostData = async (postData) => {
 		'Content-Type': 'application/json',
 		'Content-Length': JSON.stringify(postData).length
 	  }
-	}
+	} 
 	
 	return await doPostCallout(options, JSON.stringify(postData));
-
-    //try {
-		
-        //const fetchResponse = await axios.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData);
-		//logger.info(fetchResponse);
-        //return fetchResponse;
-		
-		//const fetchResponse = await got.post('https://en5kbmsv4ixvb0y.m.pipedream.net', postData).json();
-		//return fetchResponse.json();
-		
-		//logger.info(fetchResponse);
-        //return fetchResponse;
-		
-		/**const data = JSON.stringify(postData);
-
-		const options = {
-		  hostname: 'en5kbmsv4ixvb0y.m.pipedream.net',
-		  port: 443,
-		  path: '/',
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json',
-			'Content-Length': data.length
-		  }
-		}
-
-		const req = https.request(options, res => {
-		  res.on('data', d => {
-			process.stdout.write(d)
-		  })
-		});
-
-		req.on('error', error => {
-		  logger.info(error)
-		});
-
-		req.write(data);
-		req.end();**/
-		
-		
-    /**} catch (e) {
-		logger.info("catch error: " + e);
-        return e;
-    }**/
 	
+	**/
+	
+	const arrayData = [
+		{
+			"previewTitle": "preview title from Marketing Cloud",
+			"previewBody": "preview body from Marketing Cloud",
+			"payloadTitle": "payload title from Marketing Cloud",
+			"payloadBody": "payload body from Marketing Cloud",
+			"payloadImage": "https://picsum.photos/200/300",
+			"payloadRedirectUrl": "https://www.alpitour.it/",
+			"notificationTag": "DOCUMENTI",
+			"userCode" : "2020_43800",
+			"userSource": "APP"
+		}
+	];
+	
+	const authenticationHeader = 'Basic ' + Buffer.from('appmyaw' + ':' + 'Q6e^4sH#t!Rq').toString('base64');
+	
+	const options = {
+	  hostname: 'apitest.easybook.it',
+	  port: 80,
+	  path: '/ms-notification/v1/notification/send',
+	  method: 'POST',
+	  headers: {
+		'Content-Type'   : 'application/json',
+		'Content-Length' : JSON.stringify(arrayData).length,
+		'Authorization'  : authenticationHeader
+	  }
+	}
+	
+	return await doPostCallout(options, JSON.stringify(arrayData));
 }
 
 const doPostCallout = (options, data) => {
